@@ -15,6 +15,7 @@
 \maketitle
 \tableofcontents
 \newpage
+
 \section{Introduction}
 
 \subsection{A brief overview of ROC}
@@ -24,10 +25,12 @@ In signal detection theory, a receiver operating characteristic (ROC), or simply
 The ROC curve was first developed by electrical engineers and radar engineers during World War II for detecting enemy objects in battlefields and was soon introduced to psychology to account for perceptual detection of stimuli. ROC analysis since then has been used in medicine, radiology, biometrics, and other areas for many decades and is increasingly used in machine learning and data mining research \cite{1:misc}.
 
 \subsection{A brief overview of PR}
+
 %The concept of PR. The  original idea and application of PR.
 Precision-Recall (PR) curve, which is widely used in the field of classification and information retrieval, can well evaluate their performance. Precision (also called positive predictive value) is the fraction of retrieved instances that are relevant, while recall (also known as sensitivity) is the fraction of relevant instances that are retrieved \cite{2:misc}. It also can make a fair evaluation when the given tasks have a large skew in the class distribution \cite{3:article}.
 
 \section{Basic concept}
+
 %Introduction of TP, FP, FN, TN and the meaning of actual value and prediction outcome.
   In a binary decision problem, a classifier labels examples as either positive or negative. The decision made by the classifier can be represented in a structure known as a confusion matrix. The confusion matrix has four categories: True positives (TP) are examples correctly labeled as positives. False positives (FP) refer to negative examples incorrectly labeled as positive. True negatives (TN) correspond to negatives correctly labeled as negative. Finally, false negatives (FN) refer to positive examples incorrectly labeled as negative. Figure \ref{ConfusionMatrix:1} is a table of these four values. 
 
@@ -43,7 +46,7 @@ Take a simple example to understand these four values.
 If ten people go to the hospital to detect whether they have a disease. Actually, five of them are positive, others are negative. So the actual values of positive are five and actual values of negative are also five. But by testing, six are positive, which is called the prediction outcome of positive. Among them, four are really positive, and the two other people are negtive. So the four people are true positive and the two are false positive. As we know, one people is not tested but actually he is positive , so this is called false negtive. And other three people are negative and the test results are right, so they are called true negative. 
 
 \begin{table}
-\centering\caption{}
+\centering
 \begin{tabular}{|r|c|c|}
 \hline
 &Actual Pos=5&Actual Neg=5\\
@@ -53,6 +56,7 @@ Prediction Pos=6&TP=4&FP=2\\
 Prediction Neg=4&FN=1&TN=3\\
 \hline
 \end{tabular}
+\caption{}
 \end{table}
 
 \section{ROC space and PR space}
@@ -107,10 +111,14 @@ But when Recall is zero, we can only make a conclusion that the TP is zero and t
 
 Consequently, we have a one-to-one mapping between confusion matrices and points in PR space. This implies that we also have a one-to-one mapping between points (each defined by a confusion matrix) in ROC space and PR space.
 \end{proof}
+
 \subsection{Curves in ROC space and PR space}
+
 %Generation of the curve: different thresholds.
 When got one point from the calculation, the PR graph or ROC graph can only show one point. The curve can be obtained as its discrimination threshold is varied.
+
 \subsubsection{Relationship between these two curves}
+
 \begin{itemize}
 \item Domination relationship 
 
@@ -209,10 +217,10 @@ B&10&30&0.50&0.250\\
 \hline
 \end{tabular}
 \end{center}
- 
-\end{enumerate}
+ \end{enumerate}
 
 \subsubsection{The advantages of PR curve}
+
 %The illustration of  changes on the  P, R, FPR, TPR  if  the given data have a big positive value or negtive value respectively. In this way, explain the insensitivity of ROC.
 As we know, both of the two curves can evaluate the performance, but what is the difference between them? 
 
@@ -230,10 +238,8 @@ these spaces. The goal in ROC space is to be in the upper-left-hand corner, and 
 \caption{Comparison of ROC and PR}\label{comparison}
 \end{figure} 
 
-
-
-
-\section{Evaluation  of ROC and PR curves}
+\section{Evaluation  of ROC and PR curves} 
+ 
 %The reason why evaluating them.
 From the curve, We can only obtain intuitive results. But if two curves are intersect in one PR or ROC space, it is hardly know which curve is better. So it is necessary to use some quantitative analysis to evaluate them.
 \begin{description}
@@ -248,21 +254,21 @@ From the curve, We can only obtain intuitive results. But if two curves are inte
 %\item 候晓迪 CVPR2013
 
 \section{Evaluation of image segmentation using ROC and PR curves}
+
 %Relationship between original image, Ground Truth image and processed image.
 The ROC curve and PR curve can also apply to the field of image segmentation. We can evaluate the segmentation algorithm by observing the trend of the two curves. Given an original image, it is necessary to transform it to Ground Truth image (short for GT) which is obtained by artificial matting typically. The GT is used to compare with the image processed by segmentation algorithm, as it is the most accrurate segmention way until now. When using ROC or PR curves to evaluate, we need to change the format of GT and processed image to binary images. In this case, they can be compared easily.
 
 \subsection{The procedure to construct the ROC and PR curves}
+
 Take an example of constructing the ROC and PR curves in the field of image segmentation to understand these two curves better.  
 
 \begin{itemize}
-
 \item Transformation of the GT: %choice of the threshold.
 
 Table 2 is the given GT image. As we known above, it is necessary to change the format if it isn't a binary image. But how to choose the threshold to transform it from a gray-scale image to a binary image (If the GT image is a color image, we need to transform it to the gray-scale image first)? In BSDS500(one dataset of image segmentation which offer an evaluation method), they offer two methods. One is an fixed threshold for all images in the dataset, calibrated to provide optimal performance on the training set. They call it the optimal dataset scale(ODS). And another is the optimal threshold seleted on per image. They call it optimal image scale(OIS), one natually obtains even better segmentations\cite{4:article}.
 \begin{table}[h]
 \centering
 \begin{minipage}[t]{0.25\linewidth}
-\caption{}
 \begin{tabular}{|c|c|c|c|}
 \hline
 0&0&0&0\\
@@ -274,9 +280,9 @@ Table 2 is the given GT image. As we known above, it is necessary to change the 
 0&0&0&0\\
 \hline
 \end{tabular}
+\caption{}
 \end{minipage}
 \begin{minipage}[t]{0.25\linewidth}
-\caption{}
 \begin{tabular}{|c|c|c|c|}
 \hline
 128&0&0&0\\
@@ -288,6 +294,7 @@ Table 2 is the given GT image. As we known above, it is necessary to change the 
 0&0&0&64\\
 \hline
 \end{tabular}
+\caption{}
 \end{minipage}
 \end{table}
 
@@ -295,7 +302,6 @@ Table 2 is the given GT image. As we known above, it is necessary to change the 
 Table 4 is the processed image. Normalize the processed image in order to have a contrast with the GT image.
 \begin{table}[ht]
 \centering
-\caption{}
 \begin{tabular}{|c|c|c|c|}
 \hline
 0.5&0&0&0\\
@@ -307,6 +313,7 @@ Table 4 is the processed image. Normalize the processed image in order to have a
 0&0&0&1\\
 \hline
 \end{tabular}  
+\caption{}
 \end{table}
 
 \item Caculate Recall, Precision, FPR, TPR: 
@@ -317,7 +324,6 @@ Then caculate the values of Recall, Precision, FPR, TPR.
 If choose $0.25$ as the threshold, all values biger than $0.25$ will turn to be $1$ for the processed image, and the left will turn to be $0$. Then we get the table 5.
 \begin{table}[h]
 \centering
-\caption{}
 \begin{tabular}{|c|c|c|c|}
 \hline
 1&0&0&0\\
@@ -329,8 +335,8 @@ If choose $0.25$ as the threshold, all values biger than $0.25$ will turn to be 
 0&0&0&1\\
 \hline
 \end{tabular} 
+\caption{}
 \end{table}
-
 
 So the $FPR=\frac{2}{12}=\frac{1}{6}$,$TPR=R=\frac{3}{4}$, $Recall=\frac{3}{4}$, $Precision=\frac{3}{5}$. We can obtain the point $(1/6,0.75)$ in ROC space and the point $(0.75,0.6)$ in PR space.
 
@@ -338,6 +344,7 @@ In this case, three points will be obtained in ROC space, $(1/6,0.75)$, $(1/12,0
 \end{itemize}
 
 \subsection{Method to get one PR curve in BSDS500}
+
 %The introduction of the method to get one curve in BSDS.
 One image will form one curve, but one dataset may have hundreds of images, they will form hundreds of curves. How can one curve represent all of them?
 
@@ -348,7 +355,6 @@ $Recall=\frac{2+2}{4+4}=0.5$, $Precision =\frac{2+2}{3+4}=\frac{4}{7}$.
 So we obtain one point at the the threshold of 0.5. In this case, one PR curve of lots of images can be obtained. In other words, the whole Presion and Recall value should be caculate by the formula \ref{eq:whole_Recall} and \ref{eq:whole_Precision}.
 \begin{table}[!ht]
 \begin{minipage}[t]{0.17\linewidth}
-\caption{}
 \begin{tabular}{|c|c|c|c|}
 \hline
 0&0&0&0\\
@@ -360,9 +366,9 @@ So we obtain one point at the the threshold of 0.5. In this case, one PR curve o
 0&0&0&1\\
 \hline
 \end{tabular} 
+\caption{}
 \end{minipage}
 \begin{minipage}[t]{0.33\linewidth}
-\caption{}
 \begin{tabular}{|c|c|c|c|}
 \hline
 0.5&0&0&0\\
@@ -374,9 +380,9 @@ So we obtain one point at the the threshold of 0.5. In this case, one PR curve o
 0&0&0&0.25\\
 \hline
 \end{tabular} 
+\caption{}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
-\caption{}
 \begin{tabular}{|c|c|c|c|}
 \hline
 1&1&0&0\\
@@ -387,10 +393,10 @@ So we obtain one point at the the threshold of 0.5. In this case, one PR curve o
 \hline
 0&0&0&0\\
 \hline
-\end{tabular} 
+\end{tabular}
+\caption{} 
 \end{minipage}
 \begin{minipage}[t]{0.01\linewidth}
-\caption{}
 \begin{tabular}{|c|c|c|c|}
 \hline
 0.6&0&0&0\\
@@ -402,6 +408,7 @@ So we obtain one point at the the threshold of 0.5. In this case, one PR curve o
 0&0&0&0\\
 \hline
 \end{tabular} 
+\caption{}
 \end{minipage}
 \end{table}
 
@@ -413,6 +420,7 @@ Precision=\frac{\displaystyle\sum_{i=1}^n(TP_i)}{\displaystyle\sum_{i=1}^n((TP_i
 \end{equation}
 
 \subsection{The reason why BSDS choose PR curve instead of ROC curve}
+
 We have introduced the advantages of PR curve in section $3.3.2$. When involved to the field of image segmentation, we can think in this way. It is a commonly method to use segmentation algorithms to extract the edge of objects. And the use of ROC or PR curve to evaluate the results of algorithms is necessary. The edge has only one pixel width, and when using an algorithm to detect the contour, the amount of pixels we get actually is very small. If the contour pixels represent positive samples, then the negtive samples are very large. So the FPR value is inaccurate to a certain extent because it is insensitive to the FP value. And this is not we want. While Precision value is only evaluating the ratio between TP and prediction positives, it doesn't care the amount of positive examples or negative examples it originally has. And it will also change heavily when TP or FP value changes. So it is more sensitive to the results of contour detection. This is why BSDS doesn't choose ROC curve to evaluate their algorithms\cite{6:misc}.  
 
 
@@ -420,10 +428,12 @@ We have introduced the advantages of PR curve in section $3.3.2$. When involved 
 \section{Experiments}
 
 \subsection{A matlab function to compute and plot ROC and PR curves}
-There is a function of Precision-Recall and ROC curves called prec\_rec.m created by Stefan Schroedl. It is used for caculating and ploting PR and ROC curves for binary classification tasks initially.
-You can refer it from $https://github.com/zhenglab/ROC\_PR.git$.
+
+There is a function of Precision-Recall and ROC curves called \verb|prec_rec.m| created by Stefan Schroedl. It is used for caculating and ploting PR and ROC curves for binary classification tasks initially.
+You can refer it from \url{https://github.com/zhenglab/ROC\_PR.git}.
 
 \subsection{ROC and PR curves applied to the field of image processing}
+
 When using the program above to deal with image, it is necessary to do some pretreatment. The program below is a function about the pretreatment of image and we can obtain the ROC and PR curves only by inputting the compared image. The figure 6, 7, 8, 9 are original image(bmp format), GT image(bmp format), processed image(png format), and the result respectively. 
 \lstinputlisting{../programs/prec_rec_img_seg/prec_rec_img_prepro.m}
 \begin{figure}[!ht]
@@ -467,7 +477,7 @@ By observing the result, it is hardly to say whether it is right or not as the a
 
 \subsection{Two curves intersect}
 
-The experiment in section $3.3.1$ is designed by myself. In order to illustrate its validity, I compared the results obtained by the $prec\_rec.m$ function and the program written by myself. The experiment shows that they have the same results. The first program is written by myself and the second uses the $prec\_rec.m$ function. The figure 13, 14 and figure 15 are their result respectively. (I modified some parts in $prec\_rec.m$, for example, the $\ge$is changed as $>$ in line $134$, and the output using plot function is also changed.)
+The experiment in section $3.3.1$ is designed by myself. In order to illustrate its validity, I compared the results obtained by the \verb|prec_rec.m| function and the program written by myself. The experiment shows that they have the same results. The first program is written by myself and the second uses the \verb|prec_rec.m| function. The figure 13, 14 and figure 15 are their result respectively. (I modified some parts in \verb|prec_rec.m|, for example, the $\ge$is changed as $>$ in line $134$, and the output using plot function is also changed.)
 
 \lstinputlisting{../programs/PR_ROC_intersect/my_test/two_points.m}
 \lstinputlisting{../programs/PR_ROC_intersect/prec_rec/input.m}
